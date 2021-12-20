@@ -28,9 +28,11 @@ public class Day2 {
         char primerCaracter = ' ';
         char ultimoCaracter = ' ';
         int numero = 0;
+        int numeroNegativo = 0; //ejercicio 2
+        int sumaVerticalGlobal = 0; //ejercicio 2
+        int sumaVerticalParcial = 0; //ejercicio 2
 
         //carga de datos
-        
         var archivo = new File("datos.txt");
         try {
             var entrada = new BufferedReader(new FileReader(archivo));
@@ -42,12 +44,16 @@ public class Day2 {
             switch (primerCaracter) {
                 case 'f':
                     vectorForward.add(numero);
+                    sumaVerticalGlobal = numero * sumaVerticalParcial; //ejercicio 2
                     break;
                 case 'd':
                     vectorDown.add(numero);
+                    sumaVerticalParcial += numero; //ejercicio 2
                     break;
                 case 'u':
                     vectorUp.add(numero);
+                    numeroNegativo = numero * -1; //ejercicio 2
+                    sumaVerticalParcial += numeroNegativo; //ejercicio 2
                     break;
             }
 
@@ -64,13 +70,17 @@ public class Day2 {
 
                 switch (primerCaracter) {
                     case 'f':
-                        vectorForward.add(numero);
+                        vectorForward.add(numero); 
+                        sumaVerticalGlobal += numero * sumaVerticalParcial; //ejercicio 2
                         break;
                     case 'd':
                         vectorDown.add(numero);
+                        sumaVerticalParcial += numero; //ejercicio 2
                         break;
                     case 'u':
                         vectorUp.add(numero);
+                        numeroNegativo = numero * -1; //ejercicio 2
+                        sumaVerticalParcial += numeroNegativo; //ejercicio 2
                         break;
                 }
             }
@@ -81,9 +91,8 @@ public class Day2 {
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
-        
-        //ejercicio 1
 
+        //ejercicio 1
         int sumaForward = 0;
         int sumaDown = 0;
         int sumaUp = 0;
@@ -100,17 +109,14 @@ public class Day2 {
         for (int i = 0; i < vectorUp.size(); i++) {
             sumaUp += vectorUp.get(i);
         }
-        
+
         sumaUp = sumaUp * -1;
         totalVertical = sumaUp + sumaDown;
-        
-        System.out.println("La respuesta es : " + totalVertical * sumaForward);
-        
-        //ejercicio 2
-        
-        
-        
 
+        System.out.println("La respuesta es : " + totalVertical * sumaForward);
+
+        //ejercicio 2
+        System.out.println("La respuesta dos del día dos es : " + sumaForward*sumaVerticalGlobal);
     }
 
 }
